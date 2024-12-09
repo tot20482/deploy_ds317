@@ -1,10 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", Helvetica, Arial, sans-serif;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+.input-container {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.input-container p {
+  font-size: 15px;
+  color: #475160;
+}
+.input-container input {
+  font-size: 12px;
+  width: 300px;
+  padding: 6px;
+  border-color: #1ca7ec;
+  border-width: 1px;
+  border-radius: 4px;
+  outline: none;
+}

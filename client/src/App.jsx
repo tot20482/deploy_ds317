@@ -4,12 +4,7 @@ import Prediction from "./components/Prediction";
 
 const App = () => {
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "100vw",
-      }}
-    >
+    <div style={{ marginBottom: 20, width: "100vw" }}>
       <Header />
       <Prediction />
     </div>
