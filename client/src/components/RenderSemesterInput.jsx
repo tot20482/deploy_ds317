@@ -1,10 +1,46 @@
 import React from "react";
+import axios from "axios";
 
-const RenderSemesterInput = ({ semester, setRenderInput }) => {
+const RenderSemesterInput = ({
+  semester,
+  setRenderInput,
+  setFormData,
+  formData,
+}) => {
   const num = parseInt(semester, 9); // Chuyển semester thành số
   if (isNaN(num) || num <= 0) {
     setRenderInput(false);
   }
+  const handleSemesterChange = (index, e) => {
+    const value = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      [`diemtbhk_${index + 1}`]: value,
+    }));
+  };
+  const handleSubmit = () => {
+    if (
+      !formData.namsinh ||
+      !formData.gioitinh ||
+      !formData.dtb_toankhoa ||
+      !formData.dtb_tichluy ||
+      Object.values(formData).some((value) => value === "") // Check dynamic semester fields
+    ) {
+      alert("Vui lòng điền đầy đủ thông tin!");
+      return;
+    } else {
+      setFormData(formData);
+      console.log("Form data: ", formData);
+      axios
+        .post("http://localhost:5000/predict", formData)
+        .then((response) => {
+          console.log("Kết quả dự đoán:", response.data);
+        })
+        .catch((error) => {
+          console.error("Lỗi khi gửi dữ liệu:", error);
+        });
+    }
+  };
   return (
     <div
       style={{
@@ -28,6 +64,7 @@ const RenderSemesterInput = ({ semester, setRenderInput }) => {
             <input
               type="text"
               placeholder={`Nhập vào điểm học kỳ ${index + 1}`}
+              onChange={(e) => handleSemesterChange(index, e)}
             />
           </div>
         ))}
@@ -45,7 +82,8 @@ const RenderSemesterInput = ({ semester, setRenderInput }) => {
           marginTop: 10,
         }}
         onClick={() => {
-          setRenderInput(true);
+          setRenderInput(false);
+          handleSubmit();
         }}
       >
         <p style={{ fontWeight: "bold", color: "#fff" }}>Predict Score</p>
