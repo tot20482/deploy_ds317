@@ -42,6 +42,19 @@ const Prediction = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [renderInput, setRenderInput] = useState(false);
 
+  const resetFormData = () => {
+    setFormData({
+      namsinh: "",
+      gioitinh: "",
+      dtb_toankhoa: "",
+      dtb_tichluy: "",
+      sotc_tichluy: "",
+    });
+    setSemester("0");
+    setSelectedValue("");
+    setRenderInput(false);
+  };
+
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({
       ...prev,
@@ -78,6 +91,7 @@ const Prediction = () => {
             placeholder={item.placeholder}
             onChange={handleInputChange}
             fieldName={item.fieldName}
+            value={formData[item.fieldName]}
           />
         ))}
       </div>
@@ -158,6 +172,7 @@ const Prediction = () => {
           setRenderInput={setRenderInput}
           setFormData={setFormData}
           formData={formData}
+          resetFormData={resetFormData}
         />
       )}
     </div>

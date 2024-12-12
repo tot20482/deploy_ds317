@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import Modal from "./Modal";
 
 const RenderSemesterInput = ({
   semester,
   setRenderInput,
   setFormData,
   formData = {},
+  resetFormData,
 }) => {
+  const [predict, setPredict] = useState(undefined);
+  const [isOpen, setIsOpen] = useState(false);
   const num = parseInt(semester, 9); // Chuyển semester thành số
   if (isNaN(num) || num <= 0) {
     setRenderInput(false);
@@ -33,63 +37,78 @@ const RenderSemesterInput = ({
       setFormData(formData);
       console.log("Form data: ", formData);
       // console.log("Kiểu dữ liệu của formData hiện tại:", typeof formData); // object
-      axios.post("http://localhost:5000/predict", formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-      .then((response) => console.log("Kết quả dự đoán:", response.data))
-      .catch((error) => console.error("Lỗi khi gửi dữ liệu:", error));
+      axios
+        .post("http://localhost:5000/predict", formData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log("response.data.result", response.data.result);
+          setPredict(response.data.result);
+        })
+        .catch((error) => console.error("Lỗi khi gửi dữ liệu:", error));
     }
   };
   return (
-    <div
-      style={{
-        marginTop: 10,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <>
       <div
         style={{
+          marginTop: 10,
           display: "flex",
           flexDirection: "column",
-          gap: 10,
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        {Array.from({ length: num - 1 }).map((_, index) => (
-          <div className="input-container" key={index}>
-            <p>Điểm trung bình học kỳ {index + 1}</p>
-            <input
-              type="text"
-              placeholder={`Nhập vào điểm học kỳ ${index + 1}`}
-              onChange={(e) => handleSemesterChange(index, e)}
-            />
-          </div>
-        ))}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 10,
+          }}
+        >
+          {Array.from({ length: num - 1 }).map((_, index) => (
+            <div className="input-container" key={index}>
+              <p>Điểm trung bình học kỳ {index + 1}</p>
+              <input
+                type="text"
+                placeholder={`Nhập vào điểm học kỳ ${index + 1}`}
+                onChange={(e) => handleSemesterChange(index, e)}
+              />
+            </div>
+          ))}
+        </div>
+        <button
+          style={{
+            paddingTop: 8,
+            paddingBottom: 8,
+            paddingLeft: 8,
+            paddingRight: 8,
+            background: "linear-gradient(to right, #79CCEC, #1CA7EC )",
+            borderRadius: 8,
+            border: "none",
+            cursor: "pointer",
+            marginTop: 10,
+          }}
+          onClick={() => {
+            setIsOpen(true);
+            handleSubmit();
+          }}
+        >
+          <p style={{ fontWeight: "bold", color: "#fff" }}>Predict Score</p>
+        </button>
       </div>
-      <button
-        style={{
-          paddingTop: 8,
-          paddingBottom: 8,
-          paddingLeft: 8,
-          paddingRight: 8,
-          background: "linear-gradient(to right, #79CCEC, #1CA7EC )",
-          borderRadius: 8,
-          border: "none",
-          cursor: "pointer",
-          marginTop: 10,
-        }}
-        onClick={() => {
-          setRenderInput(false);
-          handleSubmit();
-        }}
-      >
-        <p style={{ fontWeight: "bold", color: "#fff" }}>Predict Score</p>
-      </button>
-    </div>
+      {isOpen && predict !== undefined && (
+        <Modal
+          setRenderInput={setRenderInput}
+          semester={semester}
+          predict={predict}
+          setIsOpen={setIsOpen}
+          resetFormData={resetFormData}
+        />
+      )}
+    </>
   );
 };
 
