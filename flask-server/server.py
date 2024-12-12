@@ -11,10 +11,6 @@ CORS(app, support_credentials=True)  # Tự động cấu hình CORS cho toàn b
 
 model = TabNetRegressor()
 
-@app.route('/members')
-def members():
-    return {"members": ["Member 1", "Member 2", "Member 3"]}
-
 @app.route('/predict', methods=['POST'])
 def predict():
     # print(request.json)
