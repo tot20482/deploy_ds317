@@ -5,7 +5,7 @@ const RenderSemesterInput = ({
   semester,
   setRenderInput,
   setFormData,
-  formData,
+  formData = {},
 }) => {
   const num = parseInt(semester, 9); // Chuyển semester thành số
   if (isNaN(num) || num <= 0) {
@@ -29,16 +29,17 @@ const RenderSemesterInput = ({
       alert("Vui lòng điền đầy đủ thông tin!");
       return;
     } else {
+      // Gửi dữ liệu lên server với key là 'formData'
       setFormData(formData);
       console.log("Form data: ", formData);
-      axios
-        .post("http://localhost:5000/predict", formData)
-        .then((response) => {
-          console.log("Kết quả dự đoán:", response.data);
-        })
-        .catch((error) => {
-          console.error("Lỗi khi gửi dữ liệu:", error);
-        });
+      // console.log("Kiểu dữ liệu của formData hiện tại:", typeof formData); // object
+      axios.post("http://localhost:5000/predict", formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then((response) => console.log("Kết quả dự đoán:", response.data))
+      .catch((error) => console.error("Lỗi khi gửi dữ liệu:", error));
     }
   };
   return (
