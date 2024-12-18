@@ -81,11 +81,11 @@ const RenderSemesterInput = ({
         </div>
         <button
           style={{
-            paddingTop: 8,
-            paddingBottom: 8,
-            paddingLeft: 8,
-            paddingRight: 8,
-            background: "linear-gradient(to right, #79CCEC, #1CA7EC )",
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingLeft: 20,
+            paddingRight: 20,
+            background: "linear-gradient(to right, #0F0C29, #302B63 )",
             borderRadius: 8,
             border: "none",
             cursor: "pointer",

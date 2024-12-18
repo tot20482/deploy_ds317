@@ -1,4 +1,6 @@
 import React from "react";
+import Bad from "./Bad";
+import Good from "./Good";
 
 const Modal = ({ resetFormData, semester, predict, setIsOpen }) => {
   return (
@@ -26,17 +28,17 @@ const Modal = ({ resetFormData, semester, predict, setIsOpen }) => {
         }}
       >
         <h5>Điểm trung bình của học kì {semester} của bạn là:</h5>
-        <h2>{Math.ceil(predict * 100) / 100}</h2>
+        <h2>{Math.round(predict * 10) / 10}</h2>
         <button
           style={{
             paddingTop: 8,
             paddingBottom: 8,
             paddingLeft: 16,
             paddingRight: 16,
-            background: "linear-gradient(to right, #79CCEC, #1CA7EC )",
             borderRadius: 8,
             border: "none",
             cursor: "pointer",
+            marginBottom: 8,
           }}
           onClick={() => {
             resetFormData();
@@ -45,6 +47,8 @@ const Modal = ({ resetFormData, semester, predict, setIsOpen }) => {
         >
           <p style={{ fontWeight: "bold", color: "#fff" }}>OK</p>
         </button>
+        {predict < 5 && <Bad />}
+        {predict >= 5 && <Good />}
       </div>
     </div>
   );

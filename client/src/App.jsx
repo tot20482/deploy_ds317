@@ -1,13 +1,17 @@
-import React from "react";
-import Header from "./components/Header";
-import Prediction from "./components/Prediction";
+import React, { useState } from "react";
+import LogIn from "./(auth)/logIn";
+import PredictionRoot from "./Prediction/prediction";
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <div style={{ marginBottom: 20, width: "100vw" }}>
-      <Header />
-      <Prediction />
-    </div>
+    <>
+      {!isLoggedIn ? (
+        <LogIn setIsLoggedIn={setIsLoggedIn} />
+      ) : (
+        <PredictionRoot />
+      )}
+    </>
   );
 };
 

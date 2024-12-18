@@ -63,13 +63,15 @@ const Prediction = () => {
   };
 
   return (
-    <div style={{ marginTop: 10 }}>
+    <div style={{ marginTop: 50 }}>
       <h1
         style={{
-          color: "#042440",
+          color: "#06141B",
           fontWeight: "bold",
-          fontSize: 25,
+          fontSize: 24,
           textAlign: "center",
+          textTransform: "uppercase",
+          // color: "linear-gradient(to right, #0F0C29, #302B63 )",
         }}
       >
         Dự đoán điểm trung bình của bạn
@@ -105,7 +107,7 @@ const Prediction = () => {
           gap: 8,
         }}
       >
-        <p style={{ fontSize: 18, fontWeight: "bold", color: "#1965B3" }}>
+        <p style={{ fontSize: 18, fontWeight: "bold", color: "#06141B" }}>
           Bạn muốn dự đoán điểm trung bình học kì mấy ?
         </p>
         <div
@@ -153,8 +155,8 @@ const Prediction = () => {
             paddingTop: 8,
             paddingBottom: 8,
             paddingLeft: 16,
+            background: "linear-gradient(to right, #0F0C29, #302B63 )",
             paddingRight: 16,
-            background: "linear-gradient(to right, #79CCEC, #1CA7EC )",
             borderRadius: 8,
             border: "none",
             cursor: "pointer",

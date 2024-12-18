@@ -3,29 +3,68 @@ import uit from "../assets/images/uit.png";
 
 const Header = () => {
   return (
-    <div style={{ height: "80px" }}>
+    <div
+      style={{
+        height: "80px",
+        borderBottomLeftRadius: 40,
+        borderBottomRightRadius: 40,
+      }}
+    >
       <div
         style={{
           display: "flex",
           flexDirection: "row",
           gap: 10,
-          justifyContent: "flex-start",
+          justifyContent: "space-between",
           alignItems: "center",
-          padding: 15,
-          marginLeft: 20,
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingLeft: 10,
+          paddingRight: 100,
+          marginLeft: 40,
+          marginRight: 60,
+          borderBottom: "2px solid #302B63",
+          // borderColor: "linear-gradient(to right, #79CCEC, #1CA7EC )",
         }}
       >
-        <img src={uit} alt="Logo UIT" style={{ width: "60px" }} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 10,
+          }}
+        >
+          <img src={uit} alt="Logo UIT" style={{ width: "60px" }} />
+          <h5
+            style={{
+              fontWeight: "bold",
+              color: "#4a63b8",
+            }}
+          >
+            Trường đại học
+            <br />
+            Công nghệ Thông Tin
+          </h5>
+        </div>
+        <h5
+          style={{
+            fontWeight: "bold",
+            color: "#4a63b8",
+            fontSize: 16,
+          }}
+        >
+          Khai phá dữ liệu trong doanh nghiệp - DS317
+        </h5>
         <h5
           style={{
             fontWeight: "bold",
             letterSpacing: 1,
-            color: "#042440",
+            color: "#4a63b8",
           }}
         >
-          Trường đại học
-          <br />
-          Công nghệ Thông Tin
+          Nhóm 7
         </h5>
       </div>
     </div>
