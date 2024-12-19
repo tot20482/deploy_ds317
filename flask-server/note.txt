@@ -1,0 +1,2 @@
+HB  - không xóa thư mục 'instance', 'models', 'datasets'
+    - cài đặt thư viện flask-sqlalchemy

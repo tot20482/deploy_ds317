@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 
 const LogIn = ({ setIsLoggedIn }) => {
+  const [mssv, setMssv] = useState(""); // State lưu giá trị mssv
+
+  // Hàm gửi dữ liệu mssv tới backend
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ mssv_login: mssv }), // Gửi mssv_login dưới dạng JSON
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Đăng nhập thành công:", data);
+        setIsLoggedIn(true); // Đăng nhập thành công, chuyển đến trang sau
+      } else {
+        console.error("Lỗi khi đăng nhập");
+      }
+    } catch (error) {
+      console.error("Có lỗi xảy ra:", error);
+    }
+  };
+
   return (
     <div
       style={{
@@ -32,6 +57,8 @@ const LogIn = ({ setIsLoggedIn }) => {
           type="text"
           placeholder="Nhập vào mã số sinh viên"
           id="mssv"
+          value={mssv} // Bind giá trị input với state
+          onChange={(e) => setMssv(e.target.value)} // Cập nhật state khi nhập
           style={{
             outline: "none",
             padding: 10,
@@ -51,9 +78,7 @@ const LogIn = ({ setIsLoggedIn }) => {
           }}
         >
           <button
-            onClick={() => {
-              setIsLoggedIn(true);
-            }}
+            onClick={handleLogin} // Gọi hàm gửi dữ liệu khi nhấn nút
             style={{
               display: "flex",
               justifyContent: "center",
