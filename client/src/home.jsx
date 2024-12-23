@@ -6,24 +6,25 @@ import Modal from "./components/Modal";
 
 const Home = () => {
   const { user } = useUserContext();
+
   const [isOpen, setIsOpen] = useState(false);
   const [predict, setPredict] = useState(undefined);
 
-const handlePredict = () => {
+  const handlePredict = () => {
     const student_data = {
       namsinh: user.namsinh,
-        gioitinh: user.gioitinh === "Male" ? 1 : 0, // ?
-        dtb_toankhoa: user.dtb_toankhoa,
-        dtb_tichluy: user.dtb_tichluy,
-        sotc_tichluy: user.sotc_tichluy,
-        diemtbhk_1: user.diemtbhk_1,
-        diemtbhk_2: user.diemtbhk_2,
-        diemtbhk_3: user.diemtbhk_3,
-        diemtbhk_4: user.diemtbhk_4,
-        diemtbhk_5: user.diemtbhk_5,
-        diemtbhk_6: user.diemtbhk_6,
-        diemtbhk_7: user.diemtbhk_7,
-        diemtbhk_8: user.diemtbhk_8,
+      gioitinh: user.gioitinh === "Male" ? 1 : 0,
+      dtb_toankhoa: user.dtb_toankhoa,
+      dtb_tichluy: user.dtb_tichluy,
+      sotc_tichluy: user.sotc_tichluy,
+      diemtbhk_1: user.diemtbhk_1,
+      diemtbhk_2: user.diemtbhk_2,
+      diemtbhk_3: user.diemtbhk_3,
+      diemtbhk_4: user.diemtbhk_4,
+      diemtbhk_5: user.diemtbhk_5,
+      diemtbhk_6: user.diemtbhk_6,
+      diemtbhk_7: user.diemtbhk_7,
+      diemtbhk_8: user.diemtbhk_8,
     };
     console.log(student_data);
     axios
@@ -39,7 +40,6 @@ const handlePredict = () => {
         );
       });
   };
-
   return (
     <>
       <Header />
@@ -68,12 +68,16 @@ const handlePredict = () => {
           }}
         >
           <div style={{}}>
+            <p>Giới tính:</p>
             <p>Điểm rèn luyện:</p>
             <p>Điểm trung bình toàn khoa:</p>
             <p>Số tín chỉ tích lũy:</p>
             <p>Điểm trung bình tích lũy:</p>
           </div>
           <div>
+            <p style={{ color: "#0041d9", fontWeight: "bold" }}>
+              {user.gioitinh === 0 ? "Nam" : "Nữ"}
+            </p>
             <p style={{ color: "#0041d9", fontWeight: "bold" }}>
               {Math.round(user.drl)}
             </p>
@@ -157,6 +161,8 @@ const handlePredict = () => {
             onClick={() => {
               handlePredict();
               console.log("hello");
+              console.log(predict);
+              setIsOpen(true);
             }}
             style={{
               padding: "10px 20px",
@@ -172,9 +178,9 @@ const handlePredict = () => {
           </button>
         </div>
       </div>
-      {/* {isOpen && predict !== undefined && (
+      {isOpen && predict !== undefined && (
         <Modal predict={predict} setIsOpen={setIsOpen} />
-      )} */}
+      )}
     </>
   );
 };

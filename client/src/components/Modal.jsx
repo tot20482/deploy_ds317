@@ -2,7 +2,7 @@ import React from "react";
 import Bad from "./Bad";
 import Good from "./Good";
 
-const Modal = ({ semester, predict, setIsOpen }) => {
+const Modal = ({ predict, setIsOpen }) => {
   return (
     <div
       style={{
@@ -39,6 +39,7 @@ const Modal = ({ semester, predict, setIsOpen }) => {
             border: "none",
             cursor: "pointer",
             marginBottom: 8,
+            backgroundColor: "#0041d9",
           }}
           onClick={() => {
             setIsOpen(false);
