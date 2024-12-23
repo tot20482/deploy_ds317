@@ -6,36 +6,3 @@
     Arial, sans-serif;
   overflow-x: hidden;
 }
-.input-container {
-  width: 500px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.input-container p,
-.input-container label {
-  font-size: 15px;
-  color: #000;
-  font-weight: "bold";
-}
-.input-container input,
-.input-container select {
-  font-size: 12px;
-  width: 300px;
-  padding: 8px;
-  border: 1px solid #302B63;
-  outline: none;
-  border-radius: 4px;
-}
-
-/* .input-container select {
-  font-size: 12px;
-  width: 300px;
-  padding: 6px;
-  border-color: #1ca7ec;
-  border-width: 1px;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-} */

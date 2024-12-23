@@ -107,6 +107,7 @@ def login():
             "diemtbhk_7": student.diemtbhk_7,
             "diemtbhk_8": student.diemtbhk_8,
         }), 200
+    
     else:
         return jsonify({"message": "Mã số sinh viên không tồn tại"}), 400
 

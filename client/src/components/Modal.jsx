@@ -2,7 +2,7 @@ import React from "react";
 import Bad from "./Bad";
 import Good from "./Good";
 
-const Modal = ({ resetFormData, semester, predict, setIsOpen }) => {
+const Modal = ({ semester, predict, setIsOpen }) => {
   return (
     <div
       style={{
@@ -27,7 +27,7 @@ const Modal = ({ resetFormData, semester, predict, setIsOpen }) => {
           textAlign: "center",
         }}
       >
-        <h5>Điểm trung bình của học kì {semester} của bạn là:</h5>
+        <h5>Điểm trung bình của học kì của bạn là:</h5>
         <h2>{Math.round(predict * 10) / 10}</h2>
         <button
           style={{
@@ -41,7 +41,6 @@ const Modal = ({ resetFormData, semester, predict, setIsOpen }) => {
             marginBottom: 8,
           }}
           onClick={() => {
-            resetFormData();
             setIsOpen(false);
           }}
         >

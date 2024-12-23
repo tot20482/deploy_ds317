@@ -5,68 +5,60 @@ const Header = () => {
   return (
     <div
       style={{
+        width: "100%",
         height: "80px",
-        borderBottomLeftRadius: 40,
+        backgroundColor: "#fff",
         borderBottomRightRadius: 40,
+        borderBottomLeftRadius: 40,
+        boxShadow: "0px 5px 6px -1px rgba(137, 137, 137, 0.2)",
+        marginBottom: "20px",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingLeft: 50,
+        paddingRight: 150,
       }}
     >
       <div
         style={{
           display: "flex",
           flexDirection: "row",
-          gap: 10,
-          justifyContent: "space-between",
+          justifyContent: "center",
           alignItems: "center",
-          paddingTop: 15,
-          paddingBottom: 15,
-          paddingLeft: 10,
-          paddingRight: 100,
-          marginLeft: 40,
-          marginRight: 60,
-          borderBottom: "2px solid #302B63",
-          // borderColor: "linear-gradient(to right, #79CCEC, #1CA7EC )",
+          gap: 4,
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-          }}
-        >
-          <img src={uit} alt="Logo UIT" style={{ width: "60px" }} />
-          <h5
-            style={{
-              fontWeight: "bold",
-              color: "#4a63b8",
-            }}
-          >
-            Trường đại học
-            <br />
-            Công nghệ Thông Tin
-          </h5>
-        </div>
+        <img src={uit} alt="Hình logo Trường" style={{ width: 60 }} />
         <h5
           style={{
             fontWeight: "bold",
-            color: "#4a63b8",
-            fontSize: 16,
+            color: "#0041d9",
           }}
         >
-          Khai phá dữ liệu trong doanh nghiệp - DS317
-        </h5>
-        <h5
-          style={{
-            fontWeight: "bold",
-            letterSpacing: 1,
-            color: "#4a63b8",
-          }}
-        >
-          Nhóm 7
+          Trường đại học
+          <br style={{ textTransform: "uppercase" }} />
+          Công nghệ Thông Tin
         </h5>
       </div>
+      <h5
+        style={{
+          fontWeight: "bold",
+          color: "#0041d9",
+          fontSize: 16,
+        }}
+      >
+        Khai phá dữ liệu trong doanh nghiệp - DS317
+      </h5>
+      <h5
+        style={{
+          fontWeight: "bold",
+          letterSpacing: 1,
+          color: "#0041d9",
+        }}
+      >
+        Nhóm 7
+      </h5>
     </div>
   );
 };
