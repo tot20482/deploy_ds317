@@ -1,41 +1,44 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import { useUserContext } from "./hooks/useUserContext";
 import Header from "./components/Header";
-// import axios from "axios";
-// import Modal from "./components/Modal";
+import axios from "axios";
+import Modal from "./components/Modal";
 
 const Home = () => {
   const { user } = useUserContext();
-  // const [isOpen, setIsOpen] = useState(false);
-  // const [predict, setPredict] = useState(undefined);
+  const [isOpen, setIsOpen] = useState(false);
+  const [predict, setPredict] = useState(undefined);
 
-  // const handlePredict = () => {
-  //   axios
-  //     .post("http://localhost:5000/predict", {
-  //       namsinh: user.namsinh,
-  //       gioitinh: user.gioitinh === "Male" ? 1 : 0,
-  //       dtb_toankhoa: user.dtb_toankhoa,
-  //       dtb_tichluy: user.dtb_tichluy,
-  //       sotc_tichluy: user.sotc_tichluy,
-  //       diemtbhk_1: user.diemtbhk_1,
-  //       diemtbhk_2: user.diemtbhk_2,
-  //       diemtbhk_3: user.diemtbhk_3,
-  //       diemtbhk_4: user.diemtbhk_4,
-  //       diemtbhk_5: user.diemtbhk_5,
-  //       diemtbhk_6: user.diemtbhk_6,
-  //       diemtbhk_7: user.diemtbhk_7,
-  //       diemtbhk_8: user.diemtbhk_8,
-  //     })
-  //     .then((response) => {
-  //       setPredict(response.data.result);
-  //     })
-  //     .catch((error) => {
-  //       console.error(
-  //         "Lỗi khi gửi dữ liệu:",
-  //         error.response ? error.response.data : error.message
-  //       );
-  //     });
-  // };
+const handlePredict = () => {
+    const student_data = {
+      namsinh: user.namsinh,
+        gioitinh: user.gioitinh === "Male" ? 1 : 0, // ?
+        dtb_toankhoa: user.dtb_toankhoa,
+        dtb_tichluy: user.dtb_tichluy,
+        sotc_tichluy: user.sotc_tichluy,
+        diemtbhk_1: user.diemtbhk_1,
+        diemtbhk_2: user.diemtbhk_2,
+        diemtbhk_3: user.diemtbhk_3,
+        diemtbhk_4: user.diemtbhk_4,
+        diemtbhk_5: user.diemtbhk_5,
+        diemtbhk_6: user.diemtbhk_6,
+        diemtbhk_7: user.diemtbhk_7,
+        diemtbhk_8: user.diemtbhk_8,
+    };
+    console.log(student_data);
+    axios
+      .post("http://localhost:5000/predict", student_data)
+      .then((response) => {
+        console.log(response.data);
+        setPredict(response.data.result);
+      })
+      .catch((error) => {
+        console.error(
+          "Lỗi khi gửi dữ liệu:",
+          error.response ? error.response.data : error.message
+        );
+      });
+  };
 
   return (
     <>
@@ -152,7 +155,7 @@ const Home = () => {
         >
           <button
             onClick={() => {
-              // handlePredict();
+              handlePredict();
               console.log("hello");
             }}
             style={{

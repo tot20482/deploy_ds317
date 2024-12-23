@@ -8,6 +8,8 @@ import os
 # from models import Students, db
 from flask_sqlalchemy import SQLAlchemy
 warnings.filterwarnings("ignore", category=FutureWarning)
+# Bỏ qua UserWarning chỉ từ pytorch_tabnet
+warnings.filterwarnings("ignore", message="Device used : cpu")
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)  # Tự động cấu hình CORS cho toàn bộ ứng dụng
@@ -48,12 +50,17 @@ model = TabNetRegressor()
 @app.route('/predict', methods=['POST'])
 def predict():
     # print(request.json)
+    # print('hello')
     form = request.json
     if not form:
         return jsonify({'error': 'No formData provided'}), 400
     
+    namsinh = int(form['namsinh'])
+    if namsinh > 1985:
+        namsinh -= 1985
+
     predictors = [
-        int(form['namsinh'])-1985,
+        namsinh,  # Không cần trừ nữa vì đã xử lý trong điều kiện
         float(form['gioitinh']),
         float(form['dtb_toankhoa']),
         float(form['dtb_tichluy']),
@@ -63,29 +70,27 @@ def predict():
     while 'diemtbhk_' + str(i) in form:
         predictors.append(float(form['diemtbhk_' + str(i)]))
         i += 1
-    print(predictors)
+    # print(predictors)
     model_path = f'models/tabnet_diemtbhk_{len(predictors)-4}.pt.zip'
     model.load_model(model_path)
     X = np.array(predictors).reshape(1, -1)
     prediction = model.predict(X)
-    # print("Prediction: ", prediction[0][0])
-    
-    # Trả về kết quả dự đoán
     result = float(prediction[0][0])
-    return jsonify({'result': result})
+
+    return jsonify({'result': result, 'message': 'Đã nhận kết quả dự đoán'})
 
 @app.route("/login", methods=["POST"])
 def login():
     # Lấy dữ liệu mssv_login từ yêu cầu JSON
     data = request.get_json()
-    print(data)
+    # print(data)
     mssv_login = data.get("mssv_login")
-    print(mssv_login)
+    # print(mssv_login)
 
     # Tìm kiếm sinh viên trong database theo mssv_login
     # student = Students.query.filter_by(mssv=mssv_login).first()
     student = Students.query.filter_by(mssv_login=mssv_login).first()
-    print(student)
+    # print(student)
     if student:
         # Trả về thông tin của tất cả các cột
         return jsonify({

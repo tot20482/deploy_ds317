@@ -5,11 +5,11 @@ cận thận khi sử dụng vì có thể làm tăng dung lượng của db
 '''
 
 import pandas as pd
-from server import db, app  # Import app và db từ server.py
-from models import Students  # Import model Students từ models.py
+from server import db, app, Students # Import app và db từ server.py
+# from models import Students  # Import model Students từ models.py
 
 # Đọc dữ liệu từ file CSV
-df = pd.read_csv('flask-server/datasets/students_dataset.csv')  # Cập nhật đường dẫn chính xác
+df = pd.read_csv('flask-server/datasets/students_dataset_v2.csv')  # Cập nhật đường dẫn chính xác
 
 # Kiểm tra xem cột 'mssv_login' đã có trong file CSV chưa
 if 'mssv_login' not in df.columns:
