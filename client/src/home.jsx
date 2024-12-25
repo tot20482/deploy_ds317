@@ -10,6 +10,7 @@ const Home = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [predict, setPredict] = useState(undefined);
+  const [weight, setWeight] = useState("");
 
   const handlePredict = () => {
     const student_data = {
@@ -27,12 +28,12 @@ const Home = () => {
       diemtbhk_7: user.diemtbhk_7,
       diemtbhk_8: user.diemtbhk_8,
     };
-    console.log(student_data);
     axios
       .post("http://localhost:5000/predict", student_data)
       .then((response) => {
         console.log(response.data);
         setPredict(response.data.result);
+        setWeight(response.data.coefficients);
       })
       .catch((error) => {
         console.error(
@@ -41,6 +42,7 @@ const Home = () => {
         );
       });
   };
+  console.log(weight);
   return (
     <>
       <Header />
@@ -193,7 +195,7 @@ const Home = () => {
         </div>
       </div>
       {isOpen && predict !== undefined && (
-        <Modal predict={predict} setIsOpen={setIsOpen} />
+        <Modal predict={predict} setIsOpen={setIsOpen} weight={weight} />
       )}
     </>
   );
