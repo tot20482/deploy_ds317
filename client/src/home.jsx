@@ -3,6 +3,7 @@ import { useUserContext } from "./hooks/useUserContext";
 import Header from "./components/Header";
 import axios from "axios";
 import Modal from "./components/Modal";
+import PlotScore from "./components/PlotScore";
 
 const Home = () => {
   const { user } = useUserContext();
@@ -176,6 +177,19 @@ const Home = () => {
           >
             Dự đoán điểm
           </button>
+        </div>
+        {/* Hiển thị biểu đồ */}
+        <div
+          style={{
+            margin: "20px auto",
+            width: "80%",
+            padding: "10px",
+            backgroundColor: "#fff",
+            borderRadius: 10,
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <PlotScore user={user} />
         </div>
       </div>
       {isOpen && predict !== undefined && (
